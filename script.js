@@ -116,15 +116,15 @@ function addCards(count = 10) {
   }
 }
 
-// Infinite scroll logic
 window.addEventListener('scroll', () => {
-  const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-
-  // If scrolled near the bottom, add more cards
-  if (scrollTop + clientHeight >= scrollHeight - 10) {
-    addCards(10); // Add 10 more cards
-  }
+    const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+    console.log(`ScrollTop: ${scrollTop}, ClientHeight: ${clientHeight}, ScrollHeight: ${scrollHeight}`);
+    
+    // Adjusted threshold for better triggering
+    if (scrollTop + clientHeight >= scrollHeight - 50) {
+        addCards(10);
+    }
 });
 
-// Initial load of cards
-addCards(20);
+// Load more cards initially for testing
+addCards(50);
