@@ -74,6 +74,10 @@ function observeLastCard() {
     }
 }
 
+
+
+
 // Initial load of cards
 addCards(50); // Start with more cards
 observeLastCard(); // Start observing the last card
+

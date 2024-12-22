@@ -6,11 +6,15 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
+
 /* Reset and Body Styles */
 body {
     font-family: 'Inter', Arial, sans-serif;
     overflow-y: scroll;
-    margin: 16px;
     background: linear-gradient(95deg, #DA8207 -0.22%, #DD9318 10.66%, #FFCB3C 26.65%, #FFCB3C 78.95%, #E39C1E 93%, #FBC63A 97.24%), #FFF;
 }
 
@@ -22,11 +26,14 @@ body {
     overflow-y: auto; /* Enable scrolling */
     height: 100vh; /* Make the container fit the viewport */
     align-items: center;
+    width: 100%;
+    margin: 16px;
 }
 
 /* General Card Styling */
 .card {
     scroll-snap-align: start;
+    scroll-snap-stop: always; /* Always stop at each snap point */
     width: 456px;
     height: 95vh; /* Full height of the viewport */
     display: flex;
@@ -44,6 +51,7 @@ body {
 }
 
 .card-wrapper {
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
