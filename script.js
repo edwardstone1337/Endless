@@ -30,101 +30,50 @@ const cardTypes = [
             </div>
         `,
     },
-    {
-        type: 'Rare Card',
-        weight: 50,
-        className: 'rare',
-        template: () => `
-            <div class="card-wrapper">
-                <div class="emoji">💎</div>
-                <div class="text-container">
-                    <h1>Rare Card</h1>
-                    <p>This is a rare card with special content.</p>
-                </div>
-            </div>
-        `,
-    },
-    {
-        type: 'Epic Card',
-        weight: 10,
-        className: 'epic',
-        template: () => `
-            <div class="card-wrapper">
-                <div class="emoji">👑</div>
-                <div class="text-container">
-                    <h1>Epic Card</h1>
-                    <p>This is an epic card with extraordinary content.</p>
-                </div>
-            </div>
-        `,
-    },
-    {
-        type: 'Legendary Card',
-        weight: 1,
-        className: 'legendary',
-        template: () => `
-            <div class="card-wrapper">
-                <div class="emoji">🏆</div>
-                <div class="text-container">
-                    <h1>Legendary Card</h1>
-                    <p>This is a legendary card with unique content.</p>
-                </div>
-            </div>
-        `,
-    },
-    {
-        type: 'Mythic Card',
-        weight: 0.01,
-        className: 'mythic',
-        template: () => `
-            <div class="card-wrapper">
-                <div class="emoji">🐉</div>
-                <div class="text-container">
-                    <h1>Mythic Card</h1>
-                    <p>This is a mythic card with legendary content.</p>
-                </div>
-            </div>
-        `,
-    },
+    // Add other card types as before...
 ];
 
-// Function to pick a card type based on weights
 function getWeightedRandomCard() {
-  const totalWeight = cardTypes.reduce((sum, card) => sum + card.weight, 0);
-  let random = Math.random() * totalWeight;
+    const totalWeight = cardTypes.reduce((sum, card) => sum + card.weight, 0);
+    let random = Math.random() * totalWeight;
 
-  for (const card of cardTypes) {
-    if (random < card.weight) return card;
-    random -= card.weight;
-  }
-}
-
-// Function to create a card element
-function createCard(cardType) {
-  const card = document.createElement('div');
-  card.className = `card ${cardType.className}`;
-  card.innerHTML = cardType.template(); // Use the specific template
-  return card;
-}
-
-// Function to add new cards
-function addCards(count = 10) {
-  for (let i = 0; i < count; i++) {
-    const cardType = getWeightedRandomCard();
-    const card = createCard(cardType);
-    container.appendChild(card);
-  }
-}
-
-window.addEventListener('scroll', () => {
-    const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-    console.log(`ScrollTop: ${scrollTop}, ClientHeight: ${clientHeight}, ScrollHeight: ${scrollHeight}`);
-    
-    // Adjusted threshold for better triggering
-    if (scrollTop + clientHeight >= scrollHeight - 50) {
-        addCards(10);
+    for (const card of cardTypes) {
+        if (random < card.weight) return card;
+        random -= card.weight;
     }
-});
+}
 
-// Load more cards initially for testing
-addCards(50);
+function createCard(cardType) {
+    const card = document.createElement('div');
+    card.className = `card ${cardType.className}`;
+    card.innerHTML = cardType.template(); // Use the specific template
+    return card;
+}
+
+function addCards(count = 10) {
+    for (let i = 0; i < count; i++) {
+        const cardType = getWeightedRandomCard();
+        const card = createCard(cardType);
+        container.appendChild(card);
+    }
+}
+
+function observeLastCard() {
+    const cards = document.querySelectorAll('.card');
+    const lastCard = cards[cards.length - 1];
+
+    if (lastCard) {
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                addCards(10); // Add more cards when the last one is visible
+                observer.unobserve(lastCard); // Stop observing the old last card
+                observeLastCard(); // Observe the new last card
+            }
+        });
+        observer.observe(lastCard);
+    }
+}
+
+// Initial load of cards
+addCards(50); // Start with more cards
+observeLastCard(); // Start observing the last card
