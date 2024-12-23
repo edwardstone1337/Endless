@@ -1,140 +1,219 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
-
 
 /* Reset and Body Styles */
 body {
-    font-family: 'Inter', Arial, sans-serif;
-    overflow-y: scroll;
-    overflow: visible; /* Ensure no accidental clipping */
-    background: linear-gradient(95deg, #DA8207 -0.22%, #DD9318 10.66%, #FFCB3C 26.65%, #FFCB3C 78.95%, #E39C1E 93%, #FBC63A 97.24%), #FFF;
-    padding: 16px;
+  font-family: "Inter", Arial, sans-serif;
+  overflow-y: scroll;
+  overflow: visible;
+  /* Ensure no accidental clipping */
+  background: linear-gradient(
+      95deg,
+      #da8207 -0.22%,
+      #dd9318 10.66%,
+      #ffcb3c 26.65%,
+      #ffcb3c 78.95%,
+      #e39c1e 93%,
+      #fbc63a 97.24%
+    ),
+    #fff;
+  padding: 16px;
 }
 
 /* Container for Cards */
 #scroll-container {
-    overflow-y: scroll; /* Maintain vertical scrolling */
-    overflow-x: hidden; /* Prevent horizontal scrolling */
-    display: flex;
-    flex-direction: column;
-    scroll-snap-type: y mandatory;
-    overflow-y: auto; /* Enable scrolling */
-    height: 100vh; /* Make the container fit the viewport */
-    align-items: center;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* Internet Explorer 10+ */
+  overflow-y: scroll;
+  /* Maintain vertical scrolling */
+  overflow-x: hidden;
+  /* Prevent horizontal scrolling */
+  display: flex;
+  flex-direction: column;
+  scroll-snap-type: y mandatory;
+  overflow-y: auto;
+  /* Enable scrolling */
+  height: 100vh;
+  /* Make the container fit the viewport */
+  align-items: center;
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* Internet Explorer 10+ */
 }
 
 #scroll-container::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, and Edge */
+  display: none;
+  /* Chrome, Safari, and Edge */
 }
 
 /* General Card Styling */
 .card {
-    scroll-snap-align: start;
-    scroll-snap-stop: always; /* Always stop at each snap point */
-    height: 95vh; /* Full height of the viewport */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 24px;
-    padding: 16px;
-    gap: 24px;
-    flex-shrink: 0;
-    border-radius: 8px;
-    box-shadow: 0px 8px 8px 2px rgba(0, 0, 0, 0.25);
-    overflow: visible; /* Allow shadows and corners to render */
-    position: relative; /* Ensure proper stacking context */
-    width: 100%; /* Ensure all cards are consistent */
-    max-width: 400px; /* Optional: constrain card width */
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  /* Always stop at each snap point */
+  height: 95vh;
+  /* Full height of the viewport */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 24px;
+  padding: 16px;
+  gap: 24px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  box-shadow: 0px 8px 8px 2px rgba(0, 0, 0, 0.25);
+  overflow: visible;
+  /* Allow shadows and corners to render */
+  position: relative;
+  /* Ensure proper stacking context */
+  width: 100%;
+  /* Ensure all cards are consistent */
+  max-width: 400px;
+  /* Optional: constrain card width */
 }
 
 .card-wrapper {
-    width: 100%; /* Ensures consistent width */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 4px;
-    align-self: stretch;
+  width: 100%;
+  /* Ensures consistent width */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  align-self: stretch;
 }
 
+/* Badge Styling */
+.badge {
+  display: flex;
+  padding: 8px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 80px;
+  color: #000;
+  text-align: center;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.common {
+  /* Specific styling for "Common" badge */
+  background-color: #eeeeee;
+  /* Grey for common rarity */
+}
+
+.uncommon {
+  /* Specific styling for "Uncommon" badge */
+  background-color: #cce6cc;
+  /* Light green for uncommon rarity */
+}
+
+.rare {
+  /* Specific styling for "Rare" badge */
+  background-color: #ccccff;
+  /* Light blue for rare rarity */
+}
+
+.epic {
+  /* Specific styling for "Epic" badge */
+  background-color: #e6cce6;
+  /* Light purple for epic rarity */
+}
+
+.legendary {
+  /* Specific styling for "Legendary" badge */
+  background-color: #ffedcc;
+  /* Light orange for legendary rarity */
+}
+
+.mythic {
+  /* Specific styling for "Mythic" badge */
+  background-color: #ffcccc;
+  /* Light red for mythic rarity */
+}
+
+/* Emoji Styling */
 .emoji {
-    color: #000;
-    text-align: center;
-    font-size: 80px;
+  color: #000;
+  text-align: center;
+  font-size: 80px;
 }
 
+/* Text Container Styling */
 .text-container {
-    width: 100%; /* Ensures consistent width */
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-    align-self: stretch;
+  width: 100%;
+  /* Ensures consistent width */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  align-self: stretch;
 }
 
 /* Card Types (Background Colors) */
 .card.common {
-    background-color: #ffffff;
-    border: 1px solid #e0e0e0;
-    color: #333;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  color: #333;
 }
 
 .card.uncommon {
-    background-color: #d4edda;
-    border: 1px solid #c3e6cb;
-    color: #155724;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  color: #155724;
 }
 
 .card.rare {
-    background-color: #d0f0ff;
-    border: 1px solid #a0d0ff;
-    color: #00509e;
+  background-color: #d0f0ff;
+  border: 1px solid #a0d0ff;
+  color: #00509e;
 }
 
 .card.epic {
-    background-color: #e6d8ff;
-    border: 1px solid #cbb2ff;
-    color: #6f42c1;
+  background-color: #e6d8ff;
+  border: 1px solid #cbb2ff;
+  color: #6f42c1;
 }
 
 .card.legendary {
-    background-color: #ffe4b3;
-    border: 1px solid #ffba57;
-    color: #9e5500;
-    font-size: 26px;
+  background-color: #ffe4b3;
+  border: 1px solid #ffba57;
+  color: #9e5500;
+  font-size: 26px;
 }
 
 .card.mythic {
-    background-color: #ffcccc;
-    border: 1px solid #ff9999;
-    color: #cc0000;
+  background-color: #ffcccc;
+  border: 1px solid #ff9999;
+  color: #cc0000;
 }
 
 /* Additional Styles for Specific Content */
 .card h1 {
-    align-self: stretch;
-    color: #000;
-    text-align: center;
-    font-size: 32px;
-    font-weight: 200;
+  align-self: stretch;
+  color: #000;
+  text-align: center;
+  font-size: 32px;
+  font-weight: 200;
 }
 
 .card p {
-    align-self: stretch;
-    color: rgba(0, 0, 0, 0.40);
-    text-align: center;
-    font-size: 16px;
-    font-weight: 400;
+  align-self: stretch;
+  color: rgba(0, 0, 0, 0.4);
+  text-align: center;
+  font-size: 16px;
+  font-weight: 400;
 }
