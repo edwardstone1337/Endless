@@ -79,16 +79,15 @@ const cardTypes = [
 ];
 
 
-
 const reelImages = [
-    'images/bell.png',
-    'images/bar.png',
-    'images/cherries.png',
-    'images/lemon.png',
-    'images/watermelon.png',
-    'images/banana.png',
-    'images/seven.png',
-    'images/grapes.png'
+    '.../bell.png',
+    '.../bar.png',
+    '.../cherries.png',
+    '.../lemon.png',
+    '.../watermelon.png',
+    '.../banana.png',
+    '.../seven.png',
+    '.../grapes.png'
 ];
 
 // Function to get a random image
@@ -96,8 +95,6 @@ function getRandomReelImage() {
     const randomIndex = Math.floor(Math.random() * reelImages.length);
     return reelImages[randomIndex];
 }
-
-
 
 
 // Adjustable Variables for Probability Management
