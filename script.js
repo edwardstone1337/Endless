@@ -80,14 +80,14 @@ const cardTypes = [
 
 
 const reelImages = [
-    '.../bell.png',
-    '.../bar.png',
-    '.../cherries.png',
-    '.../lemon.png',
-    '.../watermelon.png',
-    '.../banana.png',
-    '.../seven.png',
-    '.../grapes.png'
+    './Images/bell.png',
+    './Images/bar.png',
+    './Images/cherries.png',
+    './Images/lemon.png',
+    './Images/watermelon.png',
+    './Images/banana.png',
+    './Images/seven.png',
+    './Images/grapes.png'
 ];
 
 // Function to get a random image
