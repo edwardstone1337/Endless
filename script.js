@@ -1,223 +1,111 @@
+// Updated Script.js with Slot Machine Reel Card Adjustments
+
 const container = document.getElementById('scroll-container');
 
 // Card types with weights, classes, and content templates
 const cardTypes = [
     {
         type: 'Common Card',
-        weight: 1000,
+        weight: 1000, // This card has a weight of 1000. If the total weight of all cards is 2000, this card has a 50% chance of being selected.
         className: 'common',
         templates: [
             () => `
                 <div class="card-wrapper">
-                <div class="badge common">Common Post</div>
+                    <div class="badge common">Common Post</div>
                     <div class="emoji">📢</div>
                     <div class="text-container">
                         <h1>Advert</h1>
                         <p>What this product is actually built to serve you.</p>
                     </div>
                 </div>
-            `,
-            () => `
-                <div class="card-wrapper">
-                <div class="badge common">Common Post</div>
-                    <div class="emoji">🛍️</div>
-                    <div class="text-container">
-                        <h1>Paid Promotion</h1>
-                        <p>A product they probably don’t use, but they’re smiling!</p>
-                    </div>
-                </div>
-            `,
-            () => `
-                <div class="card-wrapper">
-                <div class="badge common">Common Post</div>
-                    <div class="emoji">😡</div>
-                    <div class="text-container">
-                        <h1>Ragebait</h1>
-                        <p>Designed to make you angry and fuel division.</p>
-                    </div>
-                </div>
-            `,
-            () => `
-                <div class="card-wrapper">
-                <div class="badge common">Common Post</div>
-                    <div class="emoji">🖱️</div>
-                    <div class="text-container">
-                        <h1>Clickbait</h1>
-                        <p>You won’t believe what happens next… but it’s not worth it.</p>
-                    </div>
-                </div>
-            `,
-            () => `
-                <div class="card-wrapper">
-                <div class="badge common">Common Post</div>
-                    <div class="emoji">🤖</div>
-                    <div class="text-container">
-                        <h1>AI-Generated</h1>
-                        <p>Low-effort words or images from a robot.</p>
-                    </div>
-                </div>
-            `,
-            () => `
-                <div class="card-wrapper">
-                <div class="badge common">Common Post</div>
-                    <div class="emoji">💰</div>
-                    <div class="text-container">
-                        <h1>Disguised Advert</h1>
-                        <p>Looks like content, but it’s selling something.</p>
-                    </div>
-                </div>
-            `,
-            () => `
-                <div class="card-wrapper">
-                <div class="badge common">Common Post</div>
-                    <div class="emoji">♻️</div>
-                    <div class="text-container">
-                        <h1>Recycled Meme</h1>
-                        <p>You’ve seen it a hundred times already.</p>
-                    </div>
-                </div>
-            `,
-        ],
+            `
+        ]
     },
     {
         type: 'Uncommon Card',
-        weight: 200,
+        weight: 400, // This card has a weight of 400. If the total weight of all cards is 2000, this card has a 20% chance of being selected.
         className: 'uncommon',
         templates: [
             () => `
                 <div class="card-wrapper">
-                <div class="badge uncommon">Uncommon Post</div>
-                    <div class="emoji">🤔</div>
-                    <div class="text-container">
-                        <h1>Mildly Interesting</h1>
-                        <p>Oh, neat. But now it’s gone from your mind.</p>
-                    </div>
-                </div>
-            `,
-            () => `
-                <div class="card-wrapper">
-                <div class="badge uncommon">Uncommon Post</div>
+                    <div class="badge uncommon">Uncommon Post</div>
                     <div class="emoji">🍳</div>
                     <div class="text-container">
                         <h1>Recipe Video</h1>
                         <p>Looks good, but you’ll never make it.</p>
                     </div>
                 </div>
-            `,
-            () => `
-                <div class="card-wrapper">
-                <div class="badge uncommon">Uncommon Post</div>
-                    <div class="emoji">🛑</div>
-                    <div class="text-container">
-                        <h1>Life Hack</h1>
-                        <p>Dubious at best, harmful at worst.</p>
-                    </div>
-                </div>
-            ` 
-        ],
+            `
+        ]
     },
     {
         type: 'Rare Card',
-        weight: 50,
+        weight: 100, // This card has a weight of 100. If the total weight of all cards is 2000, this card has a 5% chance of being selected.
         className: 'rare',
         templates: [
             () => `
                 <div class="card-wrapper">
+                    <div class="badge rare">Rare Post</div>
                     <div class="emoji">💎</div>
                     <div class="text-container">
                         <h1>Cute Animal Video</h1>
                         <p>So wholesome, it’s worth your time.</p>
                     </div>
                 </div>
-            `,
-            () => `
-                <div class="card-wrapper">
-                    <div class="emoji">💎</div>
-                    <div class="text-container">
-                        <h1>Trending Dance</h1>
-                        <p>You might even try it yourself.</p>
-                    </div>
-                </div>
             `
-        ],
+        ]
     },
     {
-        type: 'Epic Card',
-        weight: 10,
-        className: 'epic',
+        type: 'Reel Card',
+        weight: 0, // Starts at 0 but dynamically increases based on reelProbability.
+        className: 'reel',
         templates: [
-            () => `
-                <div class="card-wrapper">
-                    <div class="emoji">👑</div>
-                    <div class="text-container">
-                        <h1>A Moving Story</h1>
-                        <p>Tugs at the heartstrings and lingers.</p>
+            () => {
+                const randomImage = getRandomReelImage(); // Get a random image
+                return `
+                    <div class="card-wrapper">
+                        <div class="reel-image-container">
+                            <img src="${randomImage}" alt="Reel Symbol" />
+                        </div>
+                        <div class="text-container">
+                            <h1>Slot Machine Reel</h1>
+                            <p>Better Luck Next Time!</p>
+                        </div>
                     </div>
-                </div>
-            `,
-            () => `
-                <div class="card-wrapper">
-                    <div class="emoji">👑</div>
-                    <div class="text-container">
-                        <h1>Rare Creative Art</h1>
-                        <p>Impressive and inspiring.</p>
-                    </div>
-                </div>
-            `
-        ],
-    },
-    {
-        type: 'Legendary Card',
-        weight: 1,
-        className: 'legendary',
-        templates: [
-            () => `
-                <div class="card-wrapper">
-                    <div class="emoji">🏆</div>
-                    <div class="text-container">
-                        <h1>Life-Changing Advice</h1>
-                        <p>Resonates deeply with the viewer.</p>
-                    </div>
-                </div>
-            `,
-            () => `
-                <div class="card-wrapper">
-                    <div class="emoji">🏆</div>
-                    <div class="text-container">
-                        <h1>Incredible Success Story</h1>
-                        <p>Leaves you inspired for days.</p>
-                    </div>
-                </div>
-            `
-        ],
-    },
-    {
-        type: 'Mythic Card',
-        weight: 0.01,
-        className: 'mythic',
-        templates: [
-            () => `
-                <div class="card-wrapper">
-                    <div class="emoji">🐉</div>
-                    <div class="text-container">
-                        <h1>The Illusion</h1>
-                        <p>The ultimate prize, or so it seems. Was it worth the chase?</p>
-                    </div>
-                </div>
-            `,
-            () => `
-                <div class="card-wrapper">
-                    <div class="emoji">🐉</div>
-                    <div class="text-container">
-                        <h1>Perfect Ideal</h1>
-                        <p>An unreachable standard, always just out of reach.</p>
-                    </div>
-                </div>
-            `
-        ],
+                `;
+            }
+        ]
     }
 ];
 
+
+
+const reelImages = [
+    'images/bell.png',
+    'images/bar.png',
+    'images/cherries.png',
+    'images/lemon.png',
+    'images/watermelon.png',
+    'images/banana.png',
+    'images/seven.png',
+    'images/grapes.png'
+];
+
+// Function to get a random image
+function getRandomReelImage() {
+    const randomIndex = Math.floor(Math.random() * reelImages.length);
+    return reelImages[randomIndex];
+}
+
+
+
+
+// Adjustable Variables for Probability Management
+let reelProbability = 0; // Starting probability for Reel Cards
+const reelProbabilityIncrement = 0.01; // Increment (2%) per card generated
+const reelMaxProbability = 1; // Maximum probability cap (100%)
+const reduceOtherCardWeights = true; // Set to true to reduce other card weights as Reel Cards dominate
+const weightReductionFactor = 0.95; // Reduce other weights by 10% every cycle (adjustable)
 
 function getWeightedRandomCard() {
     const totalWeight = cardTypes.reduce((sum, card) => sum + card.weight, 0);
@@ -238,12 +126,50 @@ function createCard(cardType) {
     return card;
 }
 
+function createStartingCard() {
+    const card = document.createElement('div');
+    card.className = 'card starting';
+    card.innerHTML = `
+        <div class="card-wrapper">
+            <div class="badge">Welcome</div>
+            <div class="emoji">📜</div>
+            <div class="text-container">
+                <h1>Doomscroll Simulator</h1>
+                <p>Welcome to the Doomscroll Simulator. Explore different types of posts, each with its own rarity. How much time will you spend chasing the rarest content?</p>
+            </div>
+        </div>
+    `;
+    container.appendChild(card);
+}
+
+function adjustCardWeights() {
+    if (reduceOtherCardWeights) {
+        cardTypes.forEach(card => {
+            if (card.type !== 'Reel Card' && card.weight > 1) {
+                card.weight *= weightReductionFactor;
+            }
+        });
+    }
+}
 
 function addCards(count = 10) {
     for (let i = 0; i < count; i++) {
+        // Dynamically adjust Reel Card probability
+        const reelCard = cardTypes.find(card => card.type === 'Reel Card');
+        if (reelCard) {
+            reelCard.weight = Math.min(reelProbability * 1000, 1000); // Adjust weight dynamically
+        }
+
+        // Generate a random card
         const cardType = getWeightedRandomCard();
         const card = createCard(cardType);
         container.appendChild(card);
+
+        // Increment Reel Card probability
+        reelProbability = Math.min(reelProbability + reelProbabilityIncrement, reelMaxProbability);
+
+        // Reduce other card weights if enabled
+        adjustCardWeights();
     }
 }
 
@@ -263,10 +189,7 @@ function observeLastCard() {
     }
 }
 
-
-
-
 // Initial load of cards
+createStartingCard(); // Add the starting card
 addCards(50); // Start with more cards
 observeLastCard(); // Start observing the last card
-

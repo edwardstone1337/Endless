@@ -16,16 +16,7 @@ body {
   overflow-y: scroll;
   overflow: visible;
   /* Ensure no accidental clipping */
-  background: linear-gradient(
-      95deg,
-      #da8207 -0.22%,
-      #dd9318 10.66%,
-      #ffcb3c 26.65%,
-      #ffcb3c 78.95%,
-      #e39c1e 93%,
-      #fbc63a 97.24%
-    ),
-    #fff;
+  background: rgb(41, 41, 42);
   padding: 16px;
 }
 
@@ -92,6 +83,24 @@ body {
   align-self: stretch;
 }
 
+/* CSS for the starting card */
+.card.starting {
+  background-color: #f0f8ff; /* A light blue background for visibility */
+  border: 2px solid #007acc; /* A distinct border */
+  color: #004080; /* Text color */
+  text-align: center; /* Center align text */
+  padding: 20px; /* Add some padding */
+  border-radius: 10px; /* Rounded corners */
+  font-weight: bold; /* Make text bold */
+}
+
+/* Optional styles for the badge in the starting card */
+.card.starting .badge {
+  background-color: #007acc;
+  color: white;
+  font-size: 18px;
+}
+
 /* Badge Styling */
 .badge {
   display: flex;
@@ -143,6 +152,32 @@ body {
   /* Specific styling for "Mythic" badge */
   background-color: #ffcccc;
   /* Light red for mythic rarity */
+}
+
+.reel {
+  /* Specific styling for "Reel" (Slot Machine) badge */
+  background-color: black;
+  box-shadow: 0px 4px 12px rgba(255, 193, 7, 0.5); /* Glowing yellow shadow */
+  font-family: "Courier New", Courier, monospace; /* Retro slot machine font */
+}
+
+.reel .text-container {
+  text-align: center;
+  color: white;
+  font-size: 18px;
+}
+
+.reel .reel-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 320px;
+}
+
+.reel .reel-image-container img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }
 
 /* Emoji Styling */
